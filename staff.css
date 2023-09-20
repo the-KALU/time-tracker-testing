@@ -630,11 +630,11 @@ select {
     z-index: 10;
     display: grid;
     grid-template-columns: 1fr;
-    height: 3.5rem;
+    height: 4rem;
   }
 
   .left .sidebar {
-    margin: 0 1rem;
+    margin: 0.5rem 1rem;
     border-radius: 0;
     justify-content: space-around;
     display: flex;
@@ -643,6 +643,7 @@ select {
 
   .left .sidebar .menu-item {
     height: auto;
+    border-radius: 50%;
   }
 
   .left .sidebar a {
@@ -654,23 +655,22 @@ select {
 
   .left .sidebar a span i {
     font-size: 1.4rem;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 50%;
+    padding: 0;
+    margin: 0;
   }
   .left .sidebar .menu-item:first-child.active {
     overflow: hidden;
-    border-radius: 0;
+    border-radius: 50%;
   }
   .left .sidebar .menu-item:first-child:hover {
-    border-radius: 0;
+    border-radius: 50%;
   }
   .left .sidebar .menu-item:last-child.active {
     overflow: hidden;
-    border-radius: 0;
+    border-radius: 50%;
   }
   .left .sidebar .menu-item:last-child:hover {
-    border-radius: 0;
+    border-radius: 50%;
   }
 
   .left .sidebar i {
@@ -694,13 +694,14 @@ select {
   }
 
   .right {
-    padding: 0 3rem;
+    padding: 0 3rem 2.5rem;
   }
 
   .dashboard-container,
   .notifications-container,
   .profile-container,
-  .total-tasks {
+  .total-tasks,
+  .dashboard-container .summary {
     gap: 1rem;
   }
 
@@ -731,7 +732,8 @@ select {
   a,
   th,
   td,
-  select {
+  select,
+  label {
     font-size: 0.6rem;
   }
 
@@ -752,7 +754,11 @@ select {
   }
 
   .right {
-    padding: 0 0.7rem;
+    padding: 0 0.7rem 2.5rem;
+  }
+
+  section h2 {
+    margin: 0 0 1rem;
   }
 
   .dashboard-container,
@@ -776,7 +782,7 @@ select {
   .clock-in a,
   .clock-out a {
     display: grid;
-    gap: 1rem;
+    gap: 0.5rem;
     text-align: center;
   }
 
@@ -813,8 +819,17 @@ select {
   .attendance-history,
   .urgent-tasks,
   .assigned-tasks {
-    padding: 0.5rem;
+    padding: 0.7rem 0.5rem;
     border-radius: 5px;
+  }
+
+  .present-tasks h3,
+  .past-tasks h3,
+  .attendance-history h3,
+  .urgent-tasks h3,
+  .assigned-tasks h3,
+  .user-info h3 {
+    margin-bottom: 0.5rem;
   }
 
   .total-completed,

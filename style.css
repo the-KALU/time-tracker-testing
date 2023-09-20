@@ -27,7 +27,7 @@
   --container-width-lg: 80%;
   --container-width-mid: 85%;
   --container-width-md: 90%;
-  --container-width-sm: 96%;
+  --container-width-sm: 94%;
   --transition: all 0.4s ease;
 }
 
@@ -95,6 +95,7 @@ img {
   font-weight: 500;
   transition: var(--transition);
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .btn:hover {
@@ -499,6 +500,10 @@ input[type="checkbox"] {
   p,
   a {
     font-size: 0.7rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1.2rem;
   }
 
   /* HEADER */
