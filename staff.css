@@ -297,12 +297,13 @@ section.active[data-content] {
   flex: 1;
 }
 
-.clock-in,
-.clock-out {
+.clock-in a,
+.clock-out a {
   display: flex;
   text-align: center;
   align-items: center;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .clock-in i,
@@ -433,6 +434,8 @@ div[role="progressbar"]::before {
   background: var(--color-light);
   padding: 2rem;
   border-radius: 10px;
+  overflow: hidden;
+  overflow-x: scroll;
 }
 
 .present-tasks h3,
@@ -559,7 +562,286 @@ select {
 }
 
 @media screen and (max-width: 1500px) {
-  .container .left h3 {
+  .container {
+    width: var(--container-width-mid);
+  }
+  h1 {
+    font-size: 1.9rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
+  h4 {
+    font-size: 1.1rem;
+  }
+  p,
+  a {
+    font-size: 0.9rem;
+  }
+  .container .left h3,
+  .container .calendar__container {
     display: none;
+  }
+
+  main .container {
+    grid-template-columns: 5rem auto;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    width: var(--container-width-md);
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
+  h3 {
+    font-size: 0.9rem;
+  }
+  h4 {
+    font-size: 0.8rem;
+  }
+  p,
+  a,
+  th,
+  td {
+    font-size: 0.7rem;
+  }
+
+  main .container {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  main .container .left {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    top: auto;
+    width: 100%;
+    background: var(--color-white);
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 3.5rem;
+  }
+
+  .left .sidebar {
+    margin: 0 1rem;
+    border-radius: 0;
+    justify-content: space-around;
+    display: flex;
+    background: transparent;
+  }
+
+  .left .sidebar .menu-item {
+    height: auto;
+  }
+
+  .left .sidebar a {
+    min-width: 3rem;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .left .sidebar a span i {
+    font-size: 1.4rem;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 50%;
+  }
+  .left .sidebar .menu-item:first-child.active {
+    overflow: hidden;
+    border-radius: 0;
+  }
+  .left .sidebar .menu-item:first-child:hover {
+    border-radius: 0;
+  }
+  .left .sidebar .menu-item:last-child.active {
+    overflow: hidden;
+    border-radius: 0;
+  }
+  .left .sidebar .menu-item:last-child:hover {
+    border-radius: 0;
+  }
+
+  .left .sidebar i {
+    margin: 0;
+    padding: 0.5rem;
+    color: var(--color-primary);
+  }
+
+  .left .sidebar .active::before {
+    height: 0.5rem;
+    width: 100%;
+    bottom: 0rem;
+    display: none;
+  }
+
+  .left .btn {
+    margin: 0;
+  }
+  .left .logout {
+    display: none;
+  }
+
+  .right {
+    padding: 0 3rem;
+  }
+
+  .dashboard-container,
+  .notifications-container,
+  .profile-container,
+  .total-tasks {
+    gap: 1rem;
+  }
+
+  .total-completed .details,
+  .total-uncompleted .details {
+    gap: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    width: var(--container-width-sm);
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  h3 {
+    font-size: 0.85rem;
+  }
+  h4 {
+    font-size: 0.75rem;
+  }
+  p,
+  a,
+  th,
+  td,
+  select {
+    font-size: 0.6rem;
+  }
+
+  th,
+  td {
+    height: 1.8rem;
+    min-width: 5rem;
+  }
+
+  td.acton,
+  td.status {
+    padding-left: 0.5rem;
+    font-size: 0.6rem;
+  }
+
+  td {
+    padding-left: 0.3rem;
+  }
+
+  .right {
+    padding: 0 0.7rem;
+  }
+
+  .dashboard-container,
+  .notifications-container,
+  .profile-container,
+  .total-tasks {
+    gap: 0.7rem;
+  }
+
+  .dashboard-container .summary .profile img {
+    border-width: 0.5rem;
+  }
+
+  .dashboard-container .summary,
+  .dashboard-container .summary .profile img {
+    height: 5rem;
+    width: auto;
+    gap: 0.7rem;
+  }
+
+  .clock-in a,
+  .clock-out a {
+    display: grid;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .clock-in i,
+  .clock-out i {
+    font-size: 1.5rem;
+    border-radius: 10px;
+  }
+
+  div[role="progressbar"] {
+    --size: 3rem;
+  }
+
+  .total-completed .details,
+  .total-uncompleted .details {
+    display: grid;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .total-completed .progress,
+  .total-uncompleted .progress {
+    display: none;
+  }
+
+  .dashboard-container .summary .clock-out,
+  .dashboard-container .summary .clock-in,
+  .dashboard-container .total-completed,
+  .dashboard-container .total-uncompleted,
+  .profile-container .user-details,
+  .profile-container .user-information,
+  .present-tasks,
+  .past-tasks,
+  .attendance-history,
+  .urgent-tasks,
+  .assigned-tasks {
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+
+  .total-completed,
+  .total-uncompleted {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .total-completed i,
+  .total-uncompleted i {
+    font-size: 1rem;
+  }
+
+  .total-completed .head,
+  .total-uncompleted .head {
+    font-size: 0.7rem;
+  }
+
+  .total-completed .number,
+  .total-uncompleted .number {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  td span::before {
+    left: -0.3rem;
+    width: 0.4rem;
+    height: 0.4rem;
   }
 }

@@ -25,8 +25,9 @@
   --color-bg1: hsl(var(--hue-color), 38%, 29%);
   --color-bg2: hsl(var(--hue-color), 37%, 41%);
   --container-width-lg: 80%;
+  --container-width-mid: 85%;
   --container-width-md: 90%;
-  --container-width-sm: 94%;
+  --container-width-sm: 96%;
   --transition: all 0.4s ease;
 }
 
