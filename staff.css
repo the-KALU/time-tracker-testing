@@ -52,12 +52,12 @@ main .container .left .profile {
 }
 
 .left .sidebar .menu-item:hover {
-  background: var(--color-bg2);
+  background: var(--color-primary);
 }
 
 .left .sidebar .menu-item:hover h3,
 .left .sidebar .menu-item:hover i {
-  color: var(--color-white);
+  color: var(--color-light);
 }
 
 .left .sidebar .menu-item:first-child:hover {
@@ -70,7 +70,7 @@ main .container .left .profile {
 
 .left .sidebar i {
   font-size: 1.4rem;
-  color: var(--color-bg2);
+  color: var(--color-primary);
   margin-left: 2rem;
   position: relative;
 }
@@ -90,16 +90,16 @@ main .container .left .profile {
 .left .sidebar h3 {
   margin-left: 1.5rem;
   font-size: 1rem;
-  color: var(--color-bg2);
+  color: var(--color-primary);
 }
 
 .left .sidebar .active {
-  background: var(--color-bg2);
+  background: var(--color-primary);
 }
 
 .left .sidebar .active i,
 .left .sidebar .active h3 {
-  color: var(--color-white);
+  color: var(--color-light);
 }
 
 .left .sidebar .active::before {
@@ -133,11 +133,185 @@ main .container .left .profile {
   padding-right: 1rem;
 }
 
-/* CALENDAR */
+/* RIGHT SIDE */
 
-.calendar__container {
-  margin-top: 2rem;
+main .container .right {
+  top: -5.4rem;
 }
+
+section {
+  display: none;
+}
+
+section.active[data-content] {
+  display: block;
+}
+
+/* Employee Page Section */
+
+.dashboard-container,
+.notifications-container,
+.profile-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.dashboard-container .summary {
+  display: flex;
+  justify-content: space-between;
+  height: 8rem;
+  gap: 2rem;
+}
+
+.dashboard-hero {
+  background: var(--color-light);
+  padding: 1.5rem;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-hero .profile img {
+  border-radius: 50%;
+  border: 0.5rem solid var(--color-bg1);
+  overflow: hidden;
+  max-width: 6rem;
+  width: 100%;
+}
+
+.dashboard-hero .hero-image img {
+  max-width: 150px;
+  width: 100%;
+}
+
+.welcome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.welcome h4 {
+  margin-bottom: 1rem;
+}
+
+.clock-in-btn,
+.clock-out-btn {
+  background-color: var(--color-success);
+  color: var(--color-white);
+  font-size: 600;
+  padding: 0.8rem 1.6rem;
+}
+
+.clock-out-btn {
+  background-color: var(--color-danger-variant);
+}
+
+/* task container */
+
+.tasks-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.total-tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-light);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.total-tasks h3 {
+  width: 100%;
+}
+
+/* PIE CHART */
+
+@keyframes bake-pie {
+  from {
+    transform: rotate(0deg) translate3d(0, 0, 0);
+  }
+}
+
+.pieID {
+  display: inline-block;
+  vertical-align: top;
+}
+.pie {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  margin: 30px 0;
+}
+.pie::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  height: 100px;
+  background: var(--color-light);
+  border-radius: 50%;
+  top: 50px;
+  left: 50px;
+}
+.pie::after {
+  content: "";
+  display: block;
+  width: 120px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  box-shadow: 0 0 3px 4px rgba(0, 0, 0, 0.1);
+  margin: 220px auto;
+}
+.slice {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  clip: rect(0px, 200px, 200px, 100px);
+  animation: bake-pie 1s;
+}
+.slice span {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: black;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  clip: rect(0px, 200px, 200px, 100px);
+}
+.legend {
+  list-style-type: none;
+  min-width: 80%;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  font-size: 1rem;
+}
+.legend li {
+  height: 1.25em;
+  margin-bottom: 0.7em;
+  padding-left: 0.5em;
+  border-left: 1.25em solid black;
+}
+.legend em {
+  font-style: normal;
+}
+.legend span {
+  float: right;
+}
+
+/* CALENDAR */
 
 .wrapper {
   width: 100%;
@@ -148,8 +322,12 @@ main .container .left .profile {
 .wrapper header {
   display: flex;
   align-items: center;
-  padding: 1.5rem 1rem 1rem;
+  padding: 1.5rem 1.5rem 1rem;
   justify-content: space-between;
+}
+
+.wrapper h3 {
+  padding: 1.5rem 0 0 1.5rem;
 }
 
 header {
@@ -167,18 +345,18 @@ header .icons span {
   width: 38px;
   margin: 0 1px;
   cursor: pointer;
-  color: #878787;
+
   text-align: center;
   line-height: 38px;
   font-size: 1.9rem;
-  user-select: none;
+  --webkit-user-select: none;
   border-radius: 50%;
 }
 .icons span:last-child {
   margin-right: -10px;
 }
 header .icons span:hover {
-  background: #f2f2f2;
+  background: var(--color-bg);
 }
 header .current-date {
   font-size: 1.45rem;
@@ -198,9 +376,9 @@ header .current-date {
   margin-bottom: 20px;
 }
 .calendar li {
-  color: #333;
   width: calc(100% / 7);
-  font-size: 1.07rem;
+  font-size: 1rem;
+  font-weight: 500;
 }
 .calendar .weeks li {
   font-weight: 500;
@@ -236,88 +414,14 @@ header .current-date {
   background: #f2f2f2;
 }
 
-/* RIGHT SIDE */
+/* end of calendar */
 
-main .container .right {
-  top: -5.4rem;
-}
-
-section {
-  display: none;
-}
-
-section.active[data-content] {
-  display: block;
-}
-
-/* Employee Page Section */
-
-.dashboard-container,
-.notifications-container,
-.profile-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-.dashboard-container .summary {
-  display: flex;
-  justify-content: space-between;
-  height: 8rem;
-  gap: 2rem;
-}
-
-.total-tasks {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.dashboard-container .summary .profile img {
-  border-radius: 50%;
-  border: 0.9rem solid var(--color-light);
-  overflow: hidden;
-  width: 8rem;
-}
-
-.dashboard-container .summary .clock-out,
-.dashboard-container .summary .clock-in,
-.dashboard-container .total-completed,
-.dashboard-container .total-uncompleted,
 .profile-container .user-details,
 .profile-container .user-information {
   background: var(--color-light);
   padding: 2rem;
   border-radius: 10px;
-}
-
-.dashboard-container .summary .clock-out,
-.dashboard-container .summary .clock-in {
-  font-size: 3rem;
-  flex: 1;
-}
-
-.clock-in a,
-.clock-out a {
-  display: flex;
-  text-align: center;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-}
-
-.clock-in i,
-.clock-out i {
-  font-size: 3rem;
-  line-height: 1;
-  background: var(--color-success);
-  color: var(--color-white);
-  border-radius: 1rem;
-  padding: 0.2rem;
-}
-
-.clock-out i {
-  background: red;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .total-completed,
@@ -360,7 +464,7 @@ section.active[data-content] {
   line-height: 1;
 }
 
-/* CIRCULAR PROGRESS BAR */
+/* CIRCULAR PROGRESS BAR
 
 @keyframes growProgressBar {
   0%,
@@ -422,7 +526,7 @@ div.uncompleted-progress[role="progressbar"] {
 div[role="progressbar"]::before {
   counter-reset: percentage var(--value);
   content: counter(percentage) "%";
-}
+} */
 
 /* Tasks */
 
@@ -436,6 +540,7 @@ div[role="progressbar"]::before {
   border-radius: 10px;
   overflow: hidden;
   overflow-x: scroll;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .present-tasks h3,
@@ -444,7 +549,6 @@ div[role="progressbar"]::before {
 .urgent-tasks h3,
 .assigned-tasks h3,
 .user-info h3 {
-  text-align: center;
   margin-bottom: 1rem;
 }
 
@@ -461,9 +565,8 @@ td {
 }
 td {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 500;
   padding-left: 1rem;
-  color: var(--color-bg1);
 }
 td.action {
   padding-left: 0;
@@ -485,7 +588,7 @@ td span.in-progress::before {
 }
 
 td span.overdue::before {
-  background: red;
+  background: var(--color-danger-variant);
 }
 
 td span.completed::before {
@@ -566,23 +669,22 @@ select {
     width: var(--container-width-mid);
   }
   h1 {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
   }
   h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
   h3 {
     font-size: 1.2rem;
   }
   h4 {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   p,
   a {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
-  .container .left h3,
-  .container .calendar__container {
+  .container .left h3 {
     display: none;
   }
 
@@ -597,22 +699,40 @@ select {
   }
 
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
   h2 {
     font-size: 1.1rem;
   }
   h3 {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   h4 {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   p,
   a,
   th,
   td {
-    font-size: 0.7rem;
+    font-size: 0.66rem;
+  }
+
+  th,
+  td {
+    height: 1.8rem;
+    min-width: 6rem;
+  }
+
+  td.status {
+    min-width: 8rem;
+  }
+
+  td.task {
+    min-width: 15rem;
+  }
+
+  .legend {
+    font-size: 0.8rem;
   }
 
   main .container {
@@ -700,7 +820,6 @@ select {
   .dashboard-container,
   .notifications-container,
   .profile-container,
-  .total-tasks,
   .dashboard-container .summary {
     gap: 1rem;
   }
@@ -708,6 +827,23 @@ select {
   .total-completed .details,
   .total-uncompleted .details {
     gap: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .tasks-container {
+    grid-template-columns: 1fr;
+  }
+  .hero-image {
+    display: none;
+  }
+
+  .welcome {
+    align-items: end;
+  }
+
+  .btn {
+    padding: 0.7rem 1.4rem;
   }
 }
 
@@ -743,6 +879,14 @@ select {
     min-width: 5rem;
   }
 
+  td.status {
+    min-width: 6rem;
+  }
+
+  td.task {
+    min-width: 12rem;
+  }
+
   td.acton,
   td.status {
     padding-left: 0.5rem;
@@ -751,6 +895,10 @@ select {
 
   td {
     padding-left: 0.3rem;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
   }
 
   .right {
@@ -764,7 +912,8 @@ select {
   .dashboard-container,
   .notifications-container,
   .profile-container,
-  .total-tasks {
+  .total-tasks,
+  .tasks-container {
     gap: 0.7rem;
   }
 
@@ -858,5 +1007,16 @@ select {
     left: -0.3rem;
     width: 0.4rem;
     height: 0.4rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .welcome h4 {
+    margin-bottom: 0.5rem;
+  }
+  .welcome .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
