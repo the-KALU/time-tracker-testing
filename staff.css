@@ -52,7 +52,7 @@ main .container .left .profile {
 }
 
 .left .sidebar .menu-item:hover {
-  background: var(--color-primary);
+  background: var(--color-dark);
 }
 
 .left .sidebar .menu-item:hover h3,
@@ -70,7 +70,7 @@ main .container .left .profile {
 
 .left .sidebar i {
   font-size: 1.4rem;
-  color: var(--color-primary);
+  color: var(--color-dark);
   margin-left: 2rem;
   position: relative;
 }
@@ -94,7 +94,7 @@ main .container .left .profile {
 }
 
 .left .sidebar .active {
-  background: var(--color-primary);
+  background: var(--color-dark);
 }
 
 .left .sidebar .active i,
@@ -108,7 +108,7 @@ main .container .left .profile {
   width: 0.5rem;
   height: 100%;
   position: absolute;
-  background: var(--color-primary);
+  background: hsl(242, 92%, 26%);
 }
 
 .left .sidebar .menu-item:first-child.active {
@@ -464,79 +464,16 @@ header .current-date {
   line-height: 1;
 }
 
-/* CIRCULAR PROGRESS BAR
-
-@keyframes growProgressBar {
-  0%,
-  33% {
-    --pgPercentage: 0;
-  }
-  100% {
-    --pgPercentage: var(--value);
-  }
-}
-
-@property --pgPercentage {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 0;
-}
-
-div[role="progressbar"] {
-  --size: 5rem;
-  --pgPercentage: var(--value);
-  animation: growProgressBar 3s 1 forwards;
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: calc(var(--size) / 5);
-}
-
-div.completed-progress[role="progressbar"] {
-  background: radial-gradient(
-      closest-side,
-      var(--color-bg1) 80%,
-      transparent 0 99.9%,
-      var(--color-bg1) 0
-    ),
-    conic-gradient(
-      var(--color-success) calc(var(--pgPercentage) * 1%),
-      var(--color-bg2) 0
-    );
-  color: var(--color-success);
-}
-
-div.uncompleted-progress[role="progressbar"] {
-  background: radial-gradient(
-      closest-side,
-      var(--color-bg1) 80%,
-      transparent 0 99.9%,
-      var(--color-bg1) 0
-    ),
-    conic-gradient(
-      var(--color-warning) calc(var(--pgPercentage) * 1%),
-      var(--color-bg2) 0
-    );
-  color: var(--color-warning);
-}
-div[role="progressbar"]::before {
-  counter-reset: percentage var(--value);
-  content: counter(percentage) "%";
-} */
-
 /* Tasks */
 
 .present-tasks,
 .past-tasks,
 .attendance-history,
 .urgent-tasks,
-.assigned-tasks {
+.assigned-tasks,
+.tasks-charts {
   background: var(--color-light);
-  padding: 2rem;
+  padding: 1.5rem;
   border-radius: 10px;
   overflow: hidden;
   overflow-x: scroll;
@@ -746,7 +683,7 @@ select {
     left: 0;
     top: auto;
     width: 100%;
-    background: var(--color-white);
+    background: var(--color-dark);
     z-index: 10;
     display: grid;
     grid-template-columns: 1fr;
@@ -796,13 +733,21 @@ select {
   .left .sidebar i {
     margin: 0;
     padding: 0.5rem;
-    color: var(--color-primary);
+    color: var(--color-light);
+  }
+
+  .left .sidebar .menu-item:hover i {
+    color: var(--color-light);
+    background: var(--color-dark);
+  }
+
+  .left .sidebar .menu-item.active,
+  .left .sidebar .menu-item.active i {
+    background: hsl(242, 92%, 26%);
+    color: var(--color-white);
   }
 
   .left .sidebar .active::before {
-    height: 0.5rem;
-    width: 100%;
-    bottom: 0rem;
     display: none;
   }
 
@@ -833,6 +778,7 @@ select {
 @media screen and (max-width: 800px) {
   .tasks-container {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
   .hero-image {
     display: none;
@@ -967,7 +913,10 @@ select {
   .past-tasks,
   .attendance-history,
   .urgent-tasks,
-  .assigned-tasks {
+  .assigned-tasks,
+  .dashboard-hero,
+  .total-tasks,
+  .tasks-charts {
     padding: 0.7rem 0.5rem;
     border-radius: 5px;
   }

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./staff.css" />
+    <link rel="stylesheet" href="./admin.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
@@ -16,6 +17,8 @@
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
     />
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
     <title>Time Tracker</title>
   </head>
   <body>
@@ -26,11 +29,11 @@
           <h4>TIME TRACKER</h4>
         </a>
         <ul class="nav__menu">
-          <li class="active"><a href="./index.html">Home</a></li>
+          <li><a href="./index.html">Home</a></li>
           <li><a href="./signin.html">Logout</a></li>
           <li>
             <!-- Theme change button -->
-            <i class="uil uil-moon change-theme" id="theme-button"></i>
+            <a><i class="uil uil-moon change-theme" id="theme-button"></i></a>
           </li>
         </ul>
         <button id="open-menu-btn">
@@ -51,12 +54,16 @@
           <!-- Left Sidebar -->
           <div class="sidebar">
             <a class="menu-item active" data-target="#dashboard">
-              <span><i class="uil uil-chart"></i></span>
+              <span><i class="uil uil-chart"></i> </span>
               <h3>Dashboard</h3>
             </a>
-            <a class="menu-item" data-target="#notifications">
+            <a class="menu-item" data-target="#team">
+              <span><i class="uil uil-user"></i> </span>
+              <h3>Team</h3>
+            </a>
+            <a class="menu-item" data-target="#pending-requests">
               <span><i class="uil uil-comment-info"></i></span>
-              <h3>Notifications</h3>
+              <h3>Pending Requests</h3>
             </a>
             <a class="menu-item" data-target="#profile">
               <span><i class="uil uil-user-circle"></i></span>
@@ -65,36 +72,9 @@
           </div>
           <div class="logout">
             <a class="btn btn-primary logout__button">
-              <i class="uil uil-user-minus"></i><strong>Log Out</strong></a
+              <i class="uil uil-signout"></i>
+              <h3>Log Out</h3></a
             >
-          </div>
-
-          <div class="calendar__container">
-            <div class="wrapper">
-              <header class="cal">
-                <p class="current-date"></p>
-                <div class="icons">
-                  <span id="prev" class="material-symbols-rounded"
-                    ><i class="uil uil-arrow-left"></i
-                  ></span>
-                  <span id="next" class="material-symbols-rounded"
-                    ><i class="uil uil-arrow-right"></i
-                  ></span>
-                </div>
-              </header>
-              <div class="calendar">
-                <ul class="weeks">
-                  <li>Sun</li>
-                  <li>Mon</li>
-                  <li>Tue</li>
-                  <li>Wed</li>
-                  <li>Thu</li>
-                  <li>Fri</li>
-                  <li>Sat</li>
-                </ul>
-                <ul class="days"></ul>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -104,338 +84,700 @@
           <section class="section dashboard active" data-content id="dashboard">
             <h2>Dashboard</h2>
             <div class="dashboard-container">
-              <div class="summary">
+              <div class="dashboard-hero">
                 <div class="profile">
-                  <img src="./images/tm8.jpg" alt="" />
+                  <img src="./images/tm1.jpg" alt="" />
                   <!-- <p>Welcome John</p> -->
                 </div>
-                <div class="total-completed">
-                  <div class="details">
-                    <i class="uil uil-file-check-alt"></i>
-                    <div class="txt">
-                      <p class="head">Completed Tasks</p>
-                      <p class="number">120</p>
-                    </div>
-                  </div>
-                  <div class="details">
-                    <div
-                      class="completed-progress"
-                      role="progressbar"
-                      aria-valuenow="95"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      style="--value: 90"
-                    ></div>
+                <div class="welcome">
+                  <h4>Welcome back, <span>Kaybie!</span></h4>
+                  <div class="buttons">
+                    <a href="" class="btn clock-in-btn">
+                      <i class="uil uil-sign-in-alt"></i>
+                      Clock in
+                    </a>
+                    <a href="" class="btn clock-out-btn">
+                      <i class="uil uil-sign-out-alt"></i> Clock out
+                    </a>
                   </div>
                 </div>
-                <div class="total-uncompleted">
-                  <div class="details">
-                    <i class="uil uil-file-block-alt"></i>
-                    <div class="txt">
-                      <p class="head">Uncompleted Tasks</p>
-                      <p class="number">12</p>
+                <div class="hero-image">
+                  <img src="./images/clock-in-out.png" alt="" />
+                </div>
+              </div>
+
+              <div class="tasks-container">
+                <!-- total tasks -->
+                <div class="total-tasks">
+                  <h3>Total tasks</h3>
+
+                  <div class="pieID pie"></div>
+                  <ul class="pieID legend">
+                    <li>
+                      <em>Total completed tasks</em>
+                      <span>5321</span>
+                    </li>
+                    <li>
+                      <em>Total tasks in progress</em>
+                      <span>608</span>
+                    </li>
+                    <li>
+                      <em>Total paused tasks</em>
+                      <span>214</span>
+                    </li>
+                    <li>
+                      <em>Total tasks at risk</em>
+                      <span>204</span>
+                    </li>
+                    <li>
+                      <em>Total overdue tasks</em>
+                      <span>452</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- calender -->
+                <div class="calendar__container">
+                  <div class="wrapper">
+                    <h3>Calender</h3>
+                    <header class="cal">
+                      <p class="current-date"></p>
+                      <div class="icons">
+                        <span id="prev" class="material-symbols-rounded"
+                          ><i class="uil uil-arrow-left"></i
+                        ></span>
+                        <span id="next" class="material-symbols-rounded"
+                          ><i class="uil uil-arrow-right"></i
+                        ></span>
+                      </div>
+                    </header>
+                    <div class="calendar">
+                      <ul class="weeks">
+                        <li>S</li>
+                        <li>M</li>
+                        <li>T</li>
+                        <li>W</li>
+                        <li>T</li>
+                        <li>F</li>
+                        <li>S</li>
+                      </ul>
+                      <ul class="days"></ul>
                     </div>
-                  </div>
-                  <div class="details">
-                    <div
-                      class="uncompleted-progress"
-                      role="progressbar"
-                      aria-valuenow="15"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                      style="--value: 10"
-                    ></div>
                   </div>
                 </div>
               </div>
-              <div class="present-tasks">
-                <h3>Present Tasks</h3>
+
+              <div class="tasks-charts">
+                <h3>Employee performance chart</h3>
+                <div id="bar-chart"></div>
+              </div>
+
+              <div class="attendance-history">
+                <h3>Attendance History</h3>
                 <table>
                   <thead>
-                    <th>Task</th>
-                    <th>Date Created</th>
-                    <th>Due Date</th>
-                    <th>Priotity</th>
-                    <th>Status</th>
-                    <th>Action</th>
+                    <th>Date</th>
+                    <th>Clock in time</th>
+                    <th>Clock out time</th>
                   </thead>
 
                   <tbody>
                     <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
                       <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status">
-                        <span class="in-progress"></span>In Progress
-                      </td>
-                      <td class="action">
-                        <label for="action"></label>
-                        <select name="" id="action">
-                          <option value="">Begin</option>
-                          <option value="">Pause</option>
-                          <option value="">End</option>
-                          <option value="">Edit</option>
-                          <option value="">Delete</option>
-                        </select>
-                      </td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
                     </tr>
                     <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
                       <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Mid</td>
-                      <td class="status">
-                        <span class="overdue"></span>Overdue
-                      </td>
-                      <td class="action">
-                        <label for="action"></label>
-                        <select name="" id="action">
-                          <option value="">Begin</option>
-                          <option value="">Pause</option>
-                          <option value="">End</option>
-                          <option value="">Edit</option>
-                          <option value="">Delete</option>
-                        </select>
-                      </td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
                     </tr>
                     <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
                       <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Mid</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                      <td class="action">
-                        <label for="action"></label>
-                        <select name="" id="action">
-                          <option value="">Begin</option>
-                          <option value="">Pause</option>
-                          <option value="">End</option>
-                          <option value="">Edit</option>
-                          <option value="">Delete</option>
-                        </select>
-                      </td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
                     </tr>
                     <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
                       <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status"><span class="paused"></span>Paused</td>
-                      <td class="action">
-                        <label for="action"></label>
-                        <select name="" id="action">
-                          <option value="">Begin</option>
-                          <option value="">Pause</option>
-                          <option value="">End</option>
-                          <option value="">Edit</option>
-                          <option value="">Delete</option>
-                        </select>
-                      </td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
                     </tr>
                     <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
                       <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status">
-                        <span class="in-progress"></span>In Progress
-                      </td>
-                      <td class="action">
-                        <label for="action"></label>
-                        <select name="" id="action">
-                          <option value="">Begin</option>
-                          <option value="">Pause</option>
-                          <option value="">End</option>
-                          <option value="">Edit</option>
-                          <option value="">Delete</option>
-                        </select>
-                      </td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
                     </tr>
                     <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
                       <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Low</td>
-                      <td class="status">
-                        <span class="at-risk"></span>At Risk
-                      </td>
-                      <td class="action">
-                        <label for="action"></label>
-                        <select name="" id="action">
-                          <option value="">Begin</option>
-                          <option value="">Pause</option>
-                          <option value="">End</option>
-                          <option value="">Edit</option>
-                          <option value="">Delete</option>
-                        </select>
-                      </td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
+                    </tr>
+                    <tr>
+                      <td>13-09-2023</td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
+                    </tr>
+                    <tr>
+                      <td>13-09-2023</td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
+                    </tr>
+                    <tr>
+                      <td>13-09-2023</td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
+                    </tr>
+                    <tr>
+                      <td>13-09-2023</td>
+                      <td>09:08am</td>
+                      <td>06:02pm</td>
                     </tr>
                   </tbody>
                 </table>
-                <div class="button">
-                  <button class="btn btn-primary">
-                    Create Task <i class="uil uil-plus"></i>
-                  </button>
+              </div>
+            </div>
+          </section>
+          <!-- End of Dashboard -->
+
+          <!-- begining of Team -->
+          <section class="section team" data-content id="team">
+            <h2>Team</h2>
+            <div class="team-container">
+              <div class="team-member">
+                <div class="team-member-picture">
+                  <img src="./images/tm1.jpg" alt="" />
+                </div>
+                <div class="team-member-info">
+                  <p>Jane Doe</p>
+                  <small>Backend Developer</small>
                 </div>
               </div>
-              <div class="past-tasks">
-                <h3>Past Tasks</h3>
-                <table>
-                  <thead>
-                    <th>Task</th>
-                    <th>Date Created</th>
-                    <th>Due Date</th>
-                    <th>Priotity</th>
-                    <th>Status</th>
-                  </thead>
-
-                  <tbody>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Mid</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Mid</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Low</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Mid</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Mid</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>High</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet.</td>
-                      <td>13-09-2023</td>
-                      <td>20-09-2023</td>
-                      <td>Low</td>
-                      <td class="status">
-                        <span class="completed"></span>Completed
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="team-member">
+                <div class="team-member-picture">
+                  <img src="./images/tm1.jpg" alt="" />
+                </div>
+                <div class="team-member-info">
+                  <p>Jane Doe</p>
+                  <small>Backend Developer</small>
+                </div>
               </div>
-              <div class="pie-chart">
-                <div class="pieID pie"></div>
-                <ul class="pieID legend">
-                  <li>
-                    <em>Humans</em>
-                    <span>100</span>
-                  </li>
-                  <li>
-                    <em>Dogs</em>
-                    <span>531</span>
-                  </li>
-                  <li>
-                    <em>Cats</em>
-                    <span>868</span>
-                  </li>
-                  <li>
-                    <em>Slugs</em>
-                    <span>344</span>
-                  </li>
-                  <li>
-                    <em>Aliens</em>
-                    <span>1145</span>
-                  </li>
-                </ul>
+              <div class="team-member">
+                <div class="team-member-picture">
+                  <img src="./images/tm1.jpg" alt="" />
+                </div>
+                <div class="team-member-info">
+                  <p>Jane Doe</p>
+                  <small>Backend Developer</small>
+                </div>
+              </div>
+              <div class="team-member">
+                <div class="team-member-picture">
+                  <img src="./images/tm1.jpg" alt="" />
+                </div>
+                <div class="team-member-info">
+                  <p>Jane Doe</p>
+                  <small>Backend Developer</small>
+                </div>
+              </div>
+              <div class="team-member">
+                <div class="team-member-picture">
+                  <img src="./images/tm1.jpg" alt="" />
+                </div>
+                <div class="team-member-info">
+                  <p>Jane Doe</p>
+                  <small>Backend Developer</small>
+                </div>
+              </div>
+              <div class="team-member">
+                <div class="team-member-picture">
+                  <img src="./images/tm1.jpg" alt="" />
+                </div>
+                <div class="team-member-info">
+                  <p>Jane Doe</p>
+                  <small>Backend Developer</small>
+                </div>
+              </div>
+              <div class="team-member">
+                <div class="team-member-picture">
+                  <img src="./images/tm1.jpg" alt="" />
+                </div>
+                <div class="team-member-info">
+                  <p>Jane Doe</p>
+                  <small>Backend Developer</small>
+                </div>
+              </div>
+              <div class="team-member">
+                <div class="team-member-picture">
+                  <img src="./images/tm1.jpg" alt="" />
+                </div>
+                <div class="team-member-info">
+                  <p>Jane Doe</p>
+                  <small>Backend Developer</small>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- End of team -->
+
+          <!-- Begining of pending requests -->
+          <section
+            class="section pending-requests"
+            data-content
+            id="pending-requests"
+          >
+            <h2>Pending Requests</h2>
+            <div class="request-container">
+              <div class="request">
+                <div class="info">
+                  <div class="profile-photo">
+                    <img src="./images/tm1.jpg" alt="" />
+                  </div>
+                  <div>
+                    <h5>John Doe</h5>
+                    <p class="request-details">Sign-up request</p>
+                    <small>45 minutes ago</small>
+                  </div>
+                </div>
+                <div class="action">
+                  <button class="btn btn-success">Approve</button>
+                  <button class="btn btn-danger">Decline</button>
+                </div>
+              </div>
+              <div class="request">
+                <div class="info">
+                  <div class="profile-photo">
+                    <img src="./images/tm1.jpg" alt="" />
+                  </div>
+                  <div>
+                    <h5>Jane Doe</h5>
+                    <p class="request-details">Sign-up request</p>
+                    <small>9 hours ago</small>
+                  </div>
+                </div>
+                <div class="action">
+                  <button class="btn btn-success">Approve</button>
+                  <button class="btn btn-danger">Decline</button>
+                </div>
               </div>
             </div>
           </section>
 
-          <!-- End of Dashboard -->
+          <!-- Begining of Profile -->
+          <section class="section profile" data-content id="profile">
+            <h2>Profile</h2>
+            <div class="profile-container">
+              <div class="user-details">
+                <div class="user-picture">
+                  <img src="./images/tm8.jpg" alt="" />
+                </div>
+                <div class="profile-text">
+                  <p><strong>John Doe</strong></p>
+                  <small>name@email.com</small>
+                </div>
+                <div class="buttons">
+                  <div class="upload-new">
+                    <input
+                      type="file"
+                      accept="image/png, image/gif, image/jpeg"
+                      id="actual-btn"
+                      hidden
+                    />
+                    <label for="actual-btn" class="btn btn-primary">
+                      Change Picture</label
+                    >
+                  </div>
+                  <div class="delete-pic">
+                    <a class="btn btn-muted">Delete Picture</a>
+                  </div>
+                </div>
+              </div>
+              <div class="user-information">
+                <div class="user-info">
+                  <h3>User Information</h3>
+                </div>
+                <div class="info">
+                  <p><strong>First Name:</strong> John</p>
+                  <p><strong>Last Name:</strong> Doe</p>
+                  <p><strong>Email:</strong> name@email.com</p>
+                  <p><strong>Date of Birth:</strong> 12th August 2020</p>
+                  <p><strong>Gender:</strong> Male</p>
+                  <p><strong>Phone Number:</strong> +234 123 456 7890</p>
+                  <p>
+                    <strong>Address:</strong> Lorem ipsum dolor, sit amet
+                    consectetur adipisicing.
+                  </p>
+                </div>
+                <div class="buttons">
+                  <a class="btn btn-primary" href="./profile.html"
+                    >Edit Profile</a
+                  >
+                  <a class="btn btn-muted" href="./password.html"
+                    >Update Password</a
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </main>
+
+    <!-- Staff Pop-up -->
+    <div class="open-staff">
+      <div class="card container">
+        <div class="staff-info">
+          <div class="profile-items">
+            <div class="profile-photo">
+              <img src="./images/tm8.jpg" alt="" />
+            </div>
+            <div class="profile-txt">
+              <div class="">
+                <h3>John Doe</h3>
+                <p>Backend Developer</p>
+              </div>
+              <div class="">
+                <a class="btn btn-muted deactivate">Deactivate</a>
+                <a class="btn btn-muted delete">Delete</a>
+              </div>
+            </div>
+          </div>
+          <div class="close-btn">
+            <a class="close-modal">Close</a>
+          </div>
+        </div>
+        <!-- Staff Profile -->
+        <div class="staff-profile">
+          <h3>Profile</h3>
+          <p>
+            <strong>Name:</strong> Alice Cook <br />
+            <strong>Email: </strong> user@example.com <br />
+            <strong>Address:</strong> Lorem ipsum dolor sit amet consectetur
+            adipisicing elit. Quis? <br />
+            <strong>Phone Number:</strong> 0123 456 7890 <br />
+            <strong>Sex:</strong> Female <br />
+            <strong>Date of Birth:</strong> 12th June 1998
+          </p>
+          <a href="./profile.html" class="btn btn-primary">Edit</a>
+        </div>
+
+        <!-- Present Tasks -->
+
+        <div class="present-tasks">
+          <h3>Present Tasks</h3>
+          <table>
+            <thead>
+              <th>Task</th>
+              <th>Date Created</th>
+              <th>Due Date</th>
+              <th>Priotity</th>
+              <th>Status</th>
+              <th>Action</th>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status">
+                  <span class="in-progress"></span>In Progress
+                </td>
+                <td class="action">
+                  <label for="action"></label>
+                  <select name="" id="action">
+                    <option value="">Select</option>
+                    <option value="">Edit</option>
+                    <option value="">Delete</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Mid</td>
+                <td class="status"><span class="overdue"></span>Overdue</td>
+                <td class="action">
+                  <label for="action"></label>
+                  <select name="" id="action">
+                    <option value="">Select</option>
+                    <option value="">Edit</option>
+                    <option value="">Delete</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Mid</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+                <td class="action">
+                  <label for="action"></label>
+                  <select name="" id="action">
+                    <option value="">Select</option>
+                    <option value="">Edit</option>
+                    <option value="">Delete</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Low</td>
+                <td class="status"><span class="overdue"></span>Overdue</td>
+                <td class="action">
+                  <label for="action"></label>
+                  <select name="" id="action">
+                    <option value="">Select</option>
+                    <option value="">Edit</option>
+                    <option value="">Delete</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="paused"></span>Paused</td>
+                <td class="action">
+                  <label for="action"></label>
+                  <select name="" id="action">
+                    <option value="">Select</option>
+                    <option value="">Edit</option>
+                    <option value="">Delete</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="paused"></span>Paused</td>
+                <td class="action">
+                  <label for="action"></label>
+                  <select name="" id="action">
+                    <option value="">Select</option>
+                    <option value="">Edit</option>
+                    <option value="">Delete</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="paused"></span>Paused</td>
+                <td class="action">
+                  <label for="action"></label>
+                  <select name="" id="action">
+                    <option value="">Select</option>
+                    <option value="">Edit</option>
+                    <option value="">Delete</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Low</td>
+                <td class="status"><span class="at-risk"></span>At Risk</td>
+                <td class="action">
+                  <label for="action"></label>
+                  <select name="" id="action">
+                    <option value="">Select</option>
+                    <option value="">Edit</option>
+                    <option value="">Delete</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="button">
+            <button class="btn btn-primary">
+              Create Task <i class="uil uil-file-plus-alt"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Past Tasks -->
+
+        <div class="past-tasks">
+          <h3>Past Tasks</h3>
+          <table>
+            <thead>
+              <th>Task</th>
+              <th>Date Created</th>
+              <th>Due Date</th>
+              <th>Priotity</th>
+              <th>Status</th>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Mid</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Mid</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Low</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Mid</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Mid</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>High</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+              <tr>
+                <td class="task">Lorem ipsum dolor sit amet.</td>
+                <td>13-09-2023</td>
+                <td>20-09-2023</td>
+                <td>Low</td>
+                <td class="status"><span class="completed"></span>Completed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Attendance History -->
+
+        <div class="attendance-history">
+          <h3>Attendance History</h3>
+          <table>
+            <thead>
+              <th>Date</th>
+              <th>Clock in time</th>
+              <th>Clock out time</th>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+              <tr>
+                <td>13-09-2023</td>
+                <td>09:08am</td>
+                <td>06:02pm</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="./script.js"></script>
+    <script src="./modal.js"></script>
   </body>
 </html>
